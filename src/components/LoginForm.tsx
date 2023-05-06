@@ -1,7 +1,11 @@
-import { Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Form from "../shared/Form";
-import axios from "../api/axios";
+import { useStore } from "effector-react";
+
+import { Button } from "@mui/material";
+
+import axios from "@/api/axios";
+import Form from "@/shared/Form";
+import { $authorization, setLoggedIn } from "@/store/authorization";
 
 type FormValues = {
   username: string;
@@ -14,6 +18,9 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
+  const store = useStore($authorization);
+
+  console.log(store.loggedIn);
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     try {
@@ -21,14 +28,21 @@ const LoginForm = () => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      return await request.data;
+      await request.data;
+      setLoggedIn(true);
     } catch (err) {
-      throw new Error(err);
+      setLoggedIn(false);
+      throw new Error("Что-то пошло не так");
     }
   };
 
   return (
-    <Form handleSubmit={handleSubmit} onSubmit={onSubmit}>
+    <Form
+      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
+      width="300px"
+      height="400px"
+    >
       <label>Логин</label>
       <input
         {...register("username", {

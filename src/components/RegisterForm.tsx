@@ -22,7 +22,7 @@ const RegisterForm = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     try {
-      const request = await axios.post("/auth", JSON.stringify(data), {
+      const request = await axios.post("/register", JSON.stringify(data), {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
@@ -32,7 +32,12 @@ const RegisterForm = () => {
     }
   };
   return (
-    <Form handleSubmit={handleSubmit} onSubmit={onSubmit}>
+    <Form
+      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
+      width="300px"
+      height="400px"
+    >
       <label>Логин</label>
       <input
         {...register("username", {

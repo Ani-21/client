@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Box,
   AppBar,
@@ -7,9 +9,8 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import PhonelinkIcon from "@mui/icons-material/Phonelink";
-import FaceIcon from "@mui/icons-material/Face";
-import { useState } from "react";
+
+import { Phonelink, Face } from "@mui/icons-material/";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -30,13 +31,13 @@ const Navbar = () => {
         >
           on.CONNECT
         </Typography>
-        <PhonelinkIcon
+        <Phonelink
           sx={{
             display: { xs: "block", sm: "none" },
           }}
         />
         <Box display="flex">
-          <FaceIcon onClick={() => setOpen(true)} />
+          <Face onClick={() => setOpen(true)} />
         </Box>
       </StyledToolbar>
       <Menu

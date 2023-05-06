@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import { theme } from "../../theme";
+import { theme } from "@/theme";
 
 const Header = () => {
   return (

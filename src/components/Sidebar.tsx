@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import {
   Box,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
-  Switch,
 } from "@mui/material";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import { menuItems } from "../constants";
+
 const Sidebar = () => {
   return (
     <Box
@@ -21,30 +22,18 @@ const Sidebar = () => {
     >
       <Box position="fixed">
         <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Моя страница" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Новости" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Мессенджер" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Друзья" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <WbSunnyIcon />
-            <Switch defaultChecked />
-          </ListItem>
+          {menuItems.map((item, i) => (
+            <ListItem disablePadding key={i}>
+              <ListItemButton>
+                <Link
+                  to={item.path}
+                  style={{ textDecoration: "none", color: "grey" }}
+                >
+                  <ListItemText primary={item.text} />
+                </Link>
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </Box>
     </Box>
