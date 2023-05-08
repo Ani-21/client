@@ -30,6 +30,7 @@ const StyledCard = styled(Card)({
   height: "400px",
   marginBottom: "20px",
   padding: "0px",
+  backgroundColor: "#1E293B",
 });
 
 const StyledCardContent = styled(CardContent)({

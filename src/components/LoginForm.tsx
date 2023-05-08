@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { Button } from "@mui/material";
+import { Button, Input } from "@mui/material";
 
 import axios from "@/api/axios";
 import Form from "@/shared/Form";
@@ -39,21 +39,23 @@ const LoginForm = () => {
       width="300px"
       height="400px"
     >
-      <label>Логин</label>
-      <input
+      <label>Пароль</label>
+      <Input
         {...register("username", {
           required: "Поле обязательно для заполнения",
         })}
         placeholder="Логин"
       />
       <p>{errors.username?.message}</p>
+
       <label>Пароль</label>
-      <input
+      <Input
         {...register("password", {
           required: "Поле обязательно для заполнения",
         })}
         placeholder="Пароль"
       />
+
       <p>{errors.password?.message}</p>
       <Button type="submit">Войти</Button>
     </Form>

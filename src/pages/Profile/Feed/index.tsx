@@ -1,35 +1,15 @@
-import { useEffect, useState } from "react";
-import { useStore } from "effector-react";
 import { Box, Stack } from "@mui/material";
 
-import axios from "@/api/axios";
 import Post from "@/components/Post";
 
-import { $posts, setPosts } from "@/store/posts";
 import { SkeletonPost } from "@/shared/SkeletonPost";
+import useFetch from "@/hooks/useFetch";
+import { IPost } from "@/models/IPost";
 
 const FeedPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const posts = useStore($posts);
+  const { data: posts, loading } = useFetch<IPost[]>("/posts");
 
-  const fetchPosts = async () => {
-    setIsLoading(true);
-    try {
-      const request = await axios("/posts");
-      const response = await request.data;
-      setPosts(response);
-    } catch (err) {
-      setIsError(true);
-      throw new Error("Что-то пошло не так");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  if (posts === undefined) return <p>Нет постов</p>;
 
   const skeletons = Array(3)
     .fill("")
@@ -38,8 +18,8 @@ const FeedPage = () => {
   return (
     <Box>
       <Stack>
-        {isLoading && skeletons}
-        {[...posts.posts].reverse().map((post) => (
+        {loading && skeletons}
+        {[...posts]?.reverse().map((post) => (
           <Post
             username={post.username}
             text={post.text}

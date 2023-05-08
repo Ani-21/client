@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button } from "@mui/material";
+import { Button, Input } from "@mui/material";
 import Form from "../shared/Form";
 import axios from "../api/axios";
 
@@ -39,7 +39,7 @@ const RegisterForm = () => {
       height="400px"
     >
       <label>Логин</label>
-      <input
+      <Input
         {...register("username", {
           required: "Поле обязательно для заполнения",
         })}
@@ -47,7 +47,7 @@ const RegisterForm = () => {
       />
       <p>{errors.username?.message}</p>
       <label>Город</label>
-      <input
+      <Input
         {...register("city", {
           required: "Поле обязательно для заполнения",
         })}
@@ -55,7 +55,7 @@ const RegisterForm = () => {
       />
       <p>{errors.city?.message}</p>
       <label>Университет</label>
-      <input
+      <Input
         {...register("university", {
           required: "Поле обязательно для заполнения",
         })}
@@ -63,7 +63,7 @@ const RegisterForm = () => {
       />
       <p>{errors.university?.message}</p>
       <label>Возраст</label>
-      <input
+      <Input
         type="number"
         {...register("age", {
           required: "Поле обязательно для заполнения",
@@ -72,7 +72,7 @@ const RegisterForm = () => {
       />
       <p>{errors.age?.message}</p>
       <label>Пароль</label>
-      <input
+      <Input
         type="password"
         {...register("password", {
           required: "Поле обязательно для заполнения",
@@ -86,7 +86,7 @@ const RegisterForm = () => {
       />
       <p>{errors.password?.message}</p>
       <label>Подтверждение пароля</label>
-      <input
+      <Input
         type="password"
         {...register("confirm_password", {
           required: true,
