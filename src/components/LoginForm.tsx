@@ -1,11 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useStore } from "effector-react";
 
 import { Button } from "@mui/material";
 
 import axios from "@/api/axios";
 import Form from "@/shared/Form";
-import { $authorization, setLoggedIn } from "@/store/authorization";
+import { setLoggedIn } from "@/store/authorization";
 
 type FormValues = {
   username: string;
@@ -18,9 +17,6 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
-  const store = useStore($authorization);
-
-  console.log(store.loggedIn);
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     try {

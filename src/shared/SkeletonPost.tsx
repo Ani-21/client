@@ -4,10 +4,10 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  CardMedia,
   IconButton,
   Typography,
   Checkbox,
+  Skeleton,
   styled,
 } from "@mui/material";
 import {
@@ -15,15 +15,6 @@ import {
   FavoriteBorder,
   ChatBubbleOutline,
 } from "@mui/icons-material";
-
-import { formatDate } from "@/utils/formatDate";
-
-type PostProps = {
-  username: string;
-  text: string;
-  timestamp: string;
-  tags?: string[];
-};
 
 const StyledCard = styled(Card)({
   width: "300px",
@@ -37,23 +28,19 @@ const StyledCardContent = styled(CardContent)({
   overflowY: "scroll",
 });
 
-const Post = ({ username, text, timestamp }: PostProps) => {
+export const SkeletonPost = () => {
   return (
     <StyledCard>
-      <CardHeader
-        avatar={<Avatar sx={{ bgcolor: "red" }}>R</Avatar>}
-        title={username}
-        subheader={formatDate(timestamp)}
-      />
-      <CardMedia
-        component="img"
-        height="40%"
-        image="https://images.unsplash.com/photo-1504672281656-e4981d70414b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3570&q=80"
-      />
+      <Skeleton>
+        <CardHeader avatar={<Avatar sx={{ bgcolor: "red" }}>R</Avatar>} />
+      </Skeleton>
+      <Skeleton height="40%" />
       <StyledCardContent>
-        <Typography variant="body2" color="text.secondary">
-          {text}
-        </Typography>
+        <Skeleton>
+          <Typography variant="body2" color="text.secondary">
+            Skeleton
+          </Typography>
+        </Skeleton>
       </StyledCardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -66,5 +53,3 @@ const Post = ({ username, text, timestamp }: PostProps) => {
     </StyledCard>
   );
 };
-
-export default Post;

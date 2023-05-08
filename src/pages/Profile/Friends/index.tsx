@@ -1,38 +1,13 @@
-import { PersonCard } from "@/shared/cards/Person";
+import { UserCard } from "@/shared/cards/User";
 
 const FriendsPage = () => {
   return (
     <>
-      <PersonCard
-        username="Люба"
-        location="Санкт-Петербург"
-        university="СПбГАСу"
-        isFriend={true}
-      />
-      <PersonCard
-        username="random"
-        location="Санкт-Петербург"
-        university="СПбГАСу"
-        isFriend={false}
-      />
-      <PersonCard
-        username="Люба"
-        location="Санкт-Петербург"
-        university="СПбГАСу"
-        isFriend={true}
-      />
-      <PersonCard
-        username="Люба"
-        location="Санкт-Петербург"
-        university="СПбГАСу"
-        isFriend={true}
-      />
-      <PersonCard
-        username="Люба"
-        location="Санкт-Петербург"
-        university="СПбГАСу"
-        isFriend={true}
-      />
+      <UserCard username="Люба" university="СПбГАСу" isFriend={true} />
+      <UserCard username="random" university="СПбГАСу" isFriend={false} />
+      <UserCard username="Люба" university="СПбГАСу" isFriend={true} />
+      <UserCard username="Люба" university="СПбГАСу" isFriend={true} />
+      <UserCard username="Люба" university="СПбГАСу" isFriend={true} />
     </>
   );
 };

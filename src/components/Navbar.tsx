@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 
 import {
   Box,
@@ -17,7 +17,7 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: "space-between",
 });
 
-const Navbar = () => {
+const Navbar = memo(() => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -59,6 +59,6 @@ const Navbar = () => {
       </Menu>
     </AppBar>
   );
-};
+});
 
 export default Navbar;

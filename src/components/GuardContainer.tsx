@@ -1,15 +1,15 @@
-import { useLocation, Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useStore } from "effector-react";
-import { $authorization } from "../store/authorization";
+import { $authorization } from "@/store/authorization";
+import { AppRoutes } from "@/constants";
 
 const GuardContainer = () => {
   const store = useStore($authorization);
-  const location = useLocation();
 
-  return store.loggedIn ? (
-    <Navigate to="/profile" state={{ from: location }} replace={true} />
+  return !store.loggedIn ? (
+    <Navigate to={AppRoutes.welcomePageRoute} />
   ) : (
-    <Navigate to="/welcome" state={{ from: location }} replace />
+    <Outlet />
   );
 };
 

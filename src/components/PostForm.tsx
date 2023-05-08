@@ -1,25 +1,57 @@
+import { SubmitHandler, useForm } from "react-hook-form";
+
 import Form from "@/shared/Form";
-import { Box, Button, TextareaAutosize } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { AttachFile, ColorLens } from "@mui/icons-material";
+import axios from "@/api/axios";
+
+type PostForm = {
+  username: string;
+  text: string;
+  tags?: string;
+  selectedFile?: string;
+};
 
 const PostForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PostForm>();
+
+  const onSubmit: SubmitHandler<PostForm> = async ({
+    username = "Ani",
+    text,
+  }: PostForm) => {
+    try {
+      const request = await axios.post(
+        "/posts",
+        JSON.stringify({ username, text }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const response = await request.data;
+      console.log(response);
+    } catch (err) {
+      throw new Error("Что-то пошло не так");
+    }
+  };
+
   return (
     <Form
-      onSubmit={() => {}}
-      handleSubmit={() => {}}
+      onSubmit={onSubmit}
+      handleSubmit={handleSubmit}
       width="300px"
       height="90px"
-      btnText="Опубликовать"
     >
-      <TextareaAutosize
+      <input
         placeholder="Что нового?"
-        style={{
-          padding: "10px",
-          border: 0,
-          outline: 0,
-          resize: "none",
-        }}
+        {...register("text", {
+          required: "Заполните поле",
+        })}
       />
+      <p>{errors.text?.message}</p>
       <Box sx={{ display: "flex", alignItems: "center", borderTop: 1 }}>
         <Button>
           <AttachFile />
@@ -27,7 +59,7 @@ const PostForm = () => {
         <Button>
           <ColorLens />
         </Button>
-        <Button>Опубликовать</Button>
+        <Button type="submit">Опубликовать</Button>
       </Box>
     </Form>
   );

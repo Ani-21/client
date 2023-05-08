@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useStore } from "effector-react";
 
 import { Stack, Box, Tabs, Tab } from "@mui/material";
@@ -7,6 +8,7 @@ import { $authorization } from "@/store/authorization";
 
 import RegisterForm from "@/components/RegisterForm";
 import LoginForm from "@/components/LoginForm";
+import { AppRoutes } from "@/constants";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -27,6 +29,13 @@ function TabPanel(props: TabPanelProps) {
 const WelcomePage = () => {
   const store = useStore($authorization);
   const [value, setValue] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (store.loggedIn) {
+      navigate(AppRoutes.profilePageRoute, { replace: true });
+    }
+  }, [navigate, store.loggedIn]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

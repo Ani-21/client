@@ -1,5 +1,6 @@
-import { Box, Stack, Avatar, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { Place, School } from "@mui/icons-material";
+import { BaseUserCard } from "@/shared/cards/BaseUser";
 
 type ProfileHeaderProps = {
   username: string;
@@ -13,13 +14,7 @@ const ProfileHeader = ({
   university,
 }: ProfileHeaderProps) => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <Avatar alt={username} src="" sx={{ width: 56, height: 56 }} />
+    <BaseUserCard username={username}>
       <Stack sx={{ padding: "10px" }}>
         <Box>
           <Typography variant="h5">{username}</Typography>
@@ -40,7 +35,7 @@ const ProfileHeader = ({
           </Box>
         </Box>
       </Stack>
-    </Box>
+    </BaseUserCard>
   );
 };
 

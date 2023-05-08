@@ -12,7 +12,6 @@ const Sidebar = () => {
   return (
     <Box
       flex={1}
-      p={2}
       sx={{
         display: {
           xs: "none",
@@ -20,7 +19,7 @@ const Sidebar = () => {
         },
       }}
     >
-      <Box position="fixed">
+      <Box>
         <List>
           {menuItems.map((item, i) => (
             <ListItem disablePadding key={i}>

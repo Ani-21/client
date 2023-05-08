@@ -3,8 +3,7 @@ import { Box, Typography } from "@mui/material";
 const Rightbar = () => {
   return (
     <Box
-      flex={1}
-      p={2}
+      flex={2}
       sx={{
         display: {
           xs: "none",
