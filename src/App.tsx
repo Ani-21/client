@@ -12,10 +12,10 @@ const FeedPage = lazy(() => import("./pages/Profile/Feed"));
 const UserProfilePage = lazy(() => import("./pages/Profile/UserProfile"));
 const SearchPage = lazy(() => import("./pages/Profile/Search"));
 const FriendsPage = lazy(() => import("./pages/Profile/Friends"));
+const UserPage = lazy(() => import("./pages/Profile/User"));
 
 import { AppRoutes } from "./constants";
 import { LinearProgress } from "@mui/material";
-
 function App() {
   return (
     <Routes>
@@ -44,7 +44,7 @@ function App() {
           >
             <Route index element={<FeedPage />} />
             <Route
-              path={AppRoutes.userPageRoute}
+              path={AppRoutes.userProfilePageRoute}
               element={
                 <Suspense fallback={<LinearProgress />}>
                   <UserProfilePage />
@@ -64,6 +64,14 @@ function App() {
               element={
                 <Suspense fallback={<LinearProgress />}>
                   <SearchPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={AppRoutes.userPageRoute}
+              element={
+                <Suspense fallback={<LinearProgress />}>
+                  <UserPage />
                 </Suspense>
               }
             />

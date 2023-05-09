@@ -3,6 +3,7 @@ import { BaseUserCard } from "./BaseUser";
 import { DeleteOutline, Add } from "@mui/icons-material";
 
 export type UserCardProps = {
+  id: string;
   username: string;
   university: string;
   isFriend: boolean;
@@ -10,6 +11,7 @@ export type UserCardProps = {
 };
 
 export const UserCard = ({
+  id,
   username,
   university,
   isFriend,

@@ -3,4 +3,5 @@ export interface IUser {
   city: string;
   age: number;
   university: string;
+  friends: string[];
 }

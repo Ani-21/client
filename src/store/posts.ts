@@ -1,6 +1,5 @@
-import { createStore, createEvent, createEffect } from "effector";
+import { createStore, createEvent } from "effector";
 import { IPost } from "@/models/IPost";
-import axios from "@/api/axios";
 
 type PostsStore = {
   posts: IPost[];

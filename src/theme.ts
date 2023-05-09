@@ -15,4 +15,9 @@ export const theme = createTheme({
       contrastText: "#fff",
     },
   },
+  typography: {
+    allVariants: {
+      color: "white",
+    },
+  },
 });

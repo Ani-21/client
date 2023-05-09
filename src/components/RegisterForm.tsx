@@ -18,6 +18,7 @@ const RegisterForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    reset,
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
@@ -29,6 +30,8 @@ const RegisterForm = () => {
       return await request.data;
     } catch (err) {
       throw new Error("Что-то пошло не так");
+    } finally {
+      reset();
     }
   };
   return (

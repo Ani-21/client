@@ -1,13 +1,14 @@
 export enum AppRoutes {
   welcomePageRoute = "/",
   profilePageRoute = "/profile",
-  userPageRoute = "/profile/user/:id",
+  userProfilePageRoute = "/profile/user",
   friendsPageRoute = "/profile/friends",
   usersPageRoute = "/profile/users",
+  userPageRoute = "/profile/users/:id",
 }
 
 export const menuItems = [
-  { path: AppRoutes.userPageRoute, text: "Моя страница" },
+  { path: AppRoutes.userProfilePageRoute, text: "Моя страница" },
   { path: AppRoutes.profilePageRoute, text: "Новости" },
   { path: AppRoutes.friendsPageRoute, text: "Друзья" },
 ];

@@ -1,21 +1,19 @@
+import { useParams } from "react-router-dom";
 import { useStore } from "effector-react";
 import { Box, Stack } from "@mui/material";
 
 import Post from "@/components/Post";
-import PostFrom from "@/components/PostForm";
 import ProfileHeader from "@/components/ProfileHeader";
 
 import useFetch from "@/hooks/useFetch";
 import { IUser } from "@/models/IUser";
-import { $authorization } from "@/store/authorization";
 import { $posts } from "@/store/posts";
 
-const UserProfilePage = () => {
-  const authorization = useStore($authorization);
+const UserPage = () => {
+  const { id } = useParams();
   const postsStore = useStore($posts);
-  const { userId } = authorization;
   const { posts } = postsStore;
-  const { data: userInfo, loading } = useFetch<IUser>(`/users/${userId}`);
+  const { data: userInfo, loading } = useFetch<IUser>(`/users/${id}`);
 
   if (loading || userInfo === undefined) return <p>Загружаем</p>;
 
@@ -29,7 +27,6 @@ const UserProfilePage = () => {
           location={userInfo.city}
           university={userInfo.university}
         />
-        <PostFrom username={userInfo.username} />
       </Box>
       <Stack>
         {[...userPosts].reverse().map((post) => (
@@ -47,4 +44,4 @@ const UserProfilePage = () => {
   );
 };
 
-export default UserProfilePage;
+export default UserPage;

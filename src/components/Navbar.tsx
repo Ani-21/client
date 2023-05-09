@@ -1,9 +1,12 @@
 import { memo } from "react";
 
-import { Box, AppBar, styled, Toolbar, Typography } from "@mui/material";
+import { AppBar, styled, Toolbar, Typography, Button } from "@mui/material";
+import { Phonelink, Logout } from "@mui/icons-material/";
 
-import { Phonelink, Face, Logout } from "@mui/icons-material/";
+import { setLoggedOut } from "@/store/authorization";
 import { theme } from "@/theme";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "@/constants";
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -13,6 +16,12 @@ const StyledToolbar = styled(Toolbar)({
 });
 
 const Navbar = memo(() => {
+  const navigate = useNavigate();
+
+  const hadnleLogout = () => {
+    setLoggedOut();
+    navigate(AppRoutes.welcomePageRoute, { replace: true });
+  };
   return (
     <AppBar position="sticky" elevation={0}>
       <StyledToolbar>
@@ -20,6 +29,7 @@ const Navbar = memo(() => {
           variant="h6"
           sx={{
             display: { xs: "none", sm: "block" },
+            color: theme.palette.primary.contrastText,
           }}
         >
           on.CONNECT
@@ -29,10 +39,9 @@ const Navbar = memo(() => {
             display: { xs: "block", sm: "none" },
           }}
         />
-        <Box display="flex">
-          <Face />
+        <Button onClick={() => hadnleLogout()}>
           <Logout />
-        </Box>
+        </Button>
       </StyledToolbar>
     </AppBar>
   );

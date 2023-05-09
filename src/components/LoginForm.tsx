@@ -4,11 +4,16 @@ import { Button, Input } from "@mui/material";
 
 import axios from "@/api/axios";
 import Form from "@/shared/Form";
-import { setLoggedIn } from "@/store/authorization";
+import { setLoggedIn, setUserId } from "@/store/authorization";
 
 type FormValues = {
   username: string;
   password: string;
+};
+
+type Token = {
+  token: string;
+  userId: string;
 };
 
 const LoginForm = () => {
@@ -16,6 +21,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormValues>();
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
@@ -24,11 +30,15 @@ const LoginForm = () => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      await request.data;
+      const response: Token = await request.data;
       setLoggedIn(true);
+      setUserId(response.userId);
     } catch (err) {
       setLoggedIn(false);
+      setUserId("");
       throw new Error("Что-то пошло не так");
+    } finally {
+      reset();
     }
   };
 

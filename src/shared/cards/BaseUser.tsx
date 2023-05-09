@@ -1,3 +1,4 @@
+import { theme } from "@/theme";
 import { Box, Avatar } from "@mui/material";
 
 export type BaseCardProps = {
@@ -16,7 +17,10 @@ export const BaseUserCard = ({ username, children }: BaseCardProps) => {
       }}
     >
       <Box display="flex" alignItems="center" justifyContent="space-between">
-        <Avatar alt={username} sx={{ width: 56, height: 56 }} />
+        <Avatar
+          alt={username}
+          sx={{ width: 56, height: 56, bgcolor: theme.palette.primary.main }}
+        />
         {children}
       </Box>
     </Box>
