@@ -1,13 +1,17 @@
+import { useRef, ChangeEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useStore } from "effector-react";
 
 import Form from "@/shared/Form";
-import { Box, Button, Input } from "@mui/material";
+import { Box, Button, Input, Typography } from "@mui/material";
 import { AttachFile } from "@mui/icons-material";
 import axios from "@/api/axios";
 
+import { $authorization } from "@/store/authorization";
+
 type PostForm = {
   username: string;
-  text?: string;
+  text: string;
   tags?: string;
   selectedFile?: string;
 };
@@ -20,6 +24,24 @@ const PostForm = ({ username }: PostForm) => {
     reset,
   } = useForm<PostForm>();
 
+  const store = useStore($authorization);
+  const token = store.token;
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const formData = new FormData();
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+    const file = event.target.files[0];
+    formData.append("selectedFile", file);
+  };
+
+  const handleOpenFileModal = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   const onSubmit: SubmitHandler<PostForm> = async ({
     username,
     text,
@@ -30,10 +52,14 @@ const PostForm = ({ username }: PostForm) => {
         "/posts",
         JSON.stringify({ username, text, selectedFile }),
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
-      return await request.data;
+      const result = await request.data;
+      console.log(result);
     } catch (err) {
       throw new Error("Что-то пошло не так");
     } finally {
@@ -62,7 +88,15 @@ const PostForm = ({ username }: PostForm) => {
           color: "white",
         }}
       />
-      <p>{errors.text?.message}</p>
+      <input
+        {...register("selectedFile")}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        type="file"
+        accept="image/*,.png,.jpg,.gif,.web"
+      />
+      <Typography>{errors.text?.message}</Typography>
       <Box
         sx={{
           display: "flex",
@@ -70,7 +104,7 @@ const PostForm = ({ username }: PostForm) => {
           justifyContent: "space-around",
         }}
       >
-        <Button>
+        <Button onClick={handleOpenFileModal}>
           <AttachFile />
         </Button>
         <Button type="submit">Опубликовать</Button>
