@@ -4,13 +4,11 @@ import { Routes, Route } from "react-router-dom";
 import GuardContainer from "./components/GuardContainer";
 
 import Layout from "./layout/Layout";
-import AuthLayout from "./layout/AuthLayout";
 
 const WelcomePage = lazy(() => import("./pages/Welcome"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
 const FeedPage = lazy(() => import("./pages/Profile/Feed"));
 const UserProfilePage = lazy(() => import("./pages/Profile/UserProfile"));
-const SearchPage = lazy(() => import("./pages/Profile/Search"));
 const FriendsPage = lazy(() => import("./pages/Profile/Friends"));
 const UserPage = lazy(() => import("./pages/Profile/User"));
 
@@ -32,7 +30,7 @@ function App() {
       </Route>
 
       {/* protected */}
-      <Route element={<AuthLayout />}>
+      <Route element={<Layout />}>
         <Route element={<GuardContainer />}>
           <Route
             path={AppRoutes.profilePageRoute}
@@ -56,14 +54,6 @@ function App() {
               element={
                 <Suspense fallback={<LinearProgress />}>
                   <FriendsPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path={AppRoutes.usersPageRoute}
-              element={
-                <Suspense fallback={<LinearProgress />}>
-                  <SearchPage />
                 </Suspense>
               }
             />

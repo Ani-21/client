@@ -58,6 +58,9 @@ const PostForm = ({ username }: PostForm) => {
         {...register("text", {
           required: "Заполните поле",
         })}
+        sx={{
+          color: "white",
+        }}
       />
       <p>{errors.text?.message}</p>
       <Box sx={{ display: "flex", alignItems: "center" }}>

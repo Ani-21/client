@@ -1,9 +1,10 @@
+import { useStore } from "effector-react";
 import { memo } from "react";
 
 import { AppBar, styled, Toolbar, Typography, Button } from "@mui/material";
 import { Phonelink, Logout } from "@mui/icons-material/";
 
-import { setLoggedOut } from "@/store/authorization";
+import { $authorization, setLoggedOut } from "@/store/authorization";
 import { theme } from "@/theme";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/constants";
@@ -16,9 +17,10 @@ const StyledToolbar = styled(Toolbar)({
 });
 
 const Navbar = memo(() => {
+  const store = useStore($authorization);
   const navigate = useNavigate();
 
-  const hadnleLogout = () => {
+  const handleLogout = () => {
     setLoggedOut();
     navigate(AppRoutes.welcomePageRoute, { replace: true });
   };
@@ -39,9 +41,11 @@ const Navbar = memo(() => {
             display: { xs: "block", sm: "none" },
           }}
         />
-        <Button onClick={() => hadnleLogout()}>
-          <Logout />
-        </Button>
+        {store.loggedIn ? (
+          <Button onClick={() => handleLogout()}>
+            <Logout />
+          </Button>
+        ) : null}
       </StyledToolbar>
     </AppBar>
   );

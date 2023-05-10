@@ -6,11 +6,14 @@ import PostFrom from "@/components/PostForm";
 import ProfileHeader from "@/components/ProfileHeader";
 
 import useFetch from "@/hooks/useFetch";
+import useTabTitle from "@/hooks/useTabTitle";
+
 import { IUser } from "@/models/IUser";
 import { $authorization } from "@/store/authorization";
 import { $posts } from "@/store/posts";
 
 const UserProfilePage = () => {
+  useTabTitle("Моя страница");
   const authorization = useStore($authorization);
   const postsStore = useStore($posts);
   const { userId } = authorization;

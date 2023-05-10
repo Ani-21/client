@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import { menuItems } from "../constants";
 
-export const useTabTitle = (title: string) => {
+const useTabTitle = (title: string) => {
   const location = useLocation();
   const paths = location.pathname.split("/");
   const currentLocation = paths.at(-1) || "";
@@ -19,3 +19,5 @@ export const useTabTitle = (title: string) => {
     }
   }, [title, currentLocation]);
 };
+
+export default useTabTitle;

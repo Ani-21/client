@@ -6,8 +6,11 @@ import { Stack, Box, Tabs, Tab } from "@mui/material";
 
 import { $authorization } from "@/store/authorization";
 
+import useTabTitle from "@/hooks/useTabTitle";
+
 import RegisterForm from "@/components/RegisterForm";
 import LoginForm from "@/components/LoginForm";
+
 import { AppRoutes } from "@/constants";
 
 interface TabPanelProps {
@@ -27,6 +30,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 const WelcomePage = () => {
+  useTabTitle("Авторизация");
   const store = useStore($authorization);
   const [value, setValue] = useState(0);
   const navigate = useNavigate();
@@ -37,7 +41,7 @@ const WelcomePage = () => {
     }
   }, [navigate, store.loggedIn]);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   return (

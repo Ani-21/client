@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useRef } from "react";
-import { AxiosRequestConfig } from "axios";
+import { useStore } from "effector-react";
 import axios from "@/api/axios";
+import { $authorization } from "@/store/authorization";
 
 interface State<T> {
   data?: T;
@@ -15,10 +16,9 @@ type Action<T> =
   | { type: "fetched"; payload: T }
   | { type: "error"; payload: Error };
 
-function useFetch<T = unknown>(
-  url?: string,
-  options?: AxiosRequestConfig
-): State<T> {
+function useFetch<T = unknown>(url?: string): State<T> {
+  const store = useStore($authorization);
+  const token = store.token;
   const cache = useRef<Cache<T>>({});
 
   const cancelRequest = useRef<boolean>(false);
@@ -58,7 +58,9 @@ function useFetch<T = unknown>(
       }
 
       try {
-        const response = await axios(url, options);
+        const response = await axios(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         if (response.status !== 200) {
           throw new Error(response.statusText);
         }
@@ -80,7 +82,7 @@ function useFetch<T = unknown>(
     return () => {
       cancelRequest.current = true;
     };
-  }, [url]);
+  }, [url, store.token]);
 
   return state;
 }

@@ -1,6 +1,6 @@
 import { Button, CardHeader } from "@mui/material";
-import { BaseUserCard } from "./BaseUser";
 import { DeleteOutline, Add } from "@mui/icons-material";
+import { BaseUserCard } from "./BaseUser";
 
 export type UserCardProps = {
   id: string;
@@ -11,7 +11,6 @@ export type UserCardProps = {
 };
 
 export const UserCard = ({
-  id,
   username,
   university,
   isFriend,

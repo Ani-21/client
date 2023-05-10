@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, Input } from "@mui/material";
+import { Button, Input, Typography } from "@mui/material";
 import Form from "../shared/Form";
 import axios from "../api/axios";
 
@@ -41,40 +41,52 @@ const RegisterForm = () => {
       width="300px"
       height="400px"
     >
-      <label>Логин</label>
+      <Typography>Логин</Typography>
       <Input
         {...register("username", {
           required: "Поле обязательно для заполнения",
         })}
         placeholder="Логин"
+        sx={{
+          color: "white",
+        }}
       />
-      <p>{errors.username?.message}</p>
-      <label>Город</label>
+      <Typography>{errors.username?.message}</Typography>
+      <Typography>Город</Typography>
       <Input
         {...register("city", {
           required: "Поле обязательно для заполнения",
         })}
         placeholder="Город"
+        sx={{
+          color: "white",
+        }}
       />
-      <p>{errors.city?.message}</p>
-      <label>Университет</label>
+      <Typography>{errors.city?.message}</Typography>
+      <Typography>Университет</Typography>
       <Input
         {...register("university", {
           required: "Поле обязательно для заполнения",
         })}
         placeholder="Университет"
+        sx={{
+          color: "white",
+        }}
       />
-      <p>{errors.university?.message}</p>
-      <label>Возраст</label>
+      <Typography>{errors.university?.message}</Typography>
+      <Typography>Возраст</Typography>
       <Input
         type="number"
         {...register("age", {
           required: "Поле обязательно для заполнения",
         })}
         placeholder="Возраст"
+        sx={{
+          color: "white",
+        }}
       />
-      <p>{errors.age?.message}</p>
-      <label>Пароль</label>
+      <Typography>{errors.age?.message}</Typography>
+      <Typography>Пароль</Typography>
       <Input
         type="password"
         {...register("password", {
@@ -86,9 +98,12 @@ const RegisterForm = () => {
           },
         })}
         placeholder="Пароль"
+        sx={{
+          color: "white",
+        }}
       />
-      <p>{errors.password?.message}</p>
-      <label>Подтверждение пароля</label>
+      <Typography>{errors.password?.message}</Typography>
+      <Typography>Подтверждение пароля</Typography>
       <Input
         type="password"
         {...register("confirm_password", {
@@ -100,8 +115,11 @@ const RegisterForm = () => {
           },
         })}
         placeholder="Повторите пароль"
+        sx={{
+          color: "white",
+        }}
       />
-      <p>{errors.confirm_password?.message}</p>
+      <Typography>{errors.confirm_password?.message}</Typography>
       <Button type="submit">Зарегистрироваться</Button>
     </Form>
   );

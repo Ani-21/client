@@ -1,10 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { Button, Input } from "@mui/material";
+import { Button, Input, Typography } from "@mui/material";
 
 import axios from "@/api/axios";
 import Form from "@/shared/Form";
-import { setLoggedIn, setUserId } from "@/store/authorization";
+import { setLoggedIn, setToken, setUserId } from "@/store/authorization";
 
 type FormValues = {
   username: string;
@@ -12,7 +12,7 @@ type FormValues = {
 };
 
 type Token = {
-  token: string;
+  accessToken: string;
   userId: string;
 };
 
@@ -31,8 +31,9 @@ const LoginForm = () => {
         withCredentials: true,
       });
       const response: Token = await request.data;
-      setLoggedIn(true);
+      setToken(response.accessToken);
       setUserId(response.userId);
+      setLoggedIn(true);
     } catch (err) {
       setLoggedIn(false);
       setUserId("");
@@ -49,24 +50,31 @@ const LoginForm = () => {
       width="300px"
       height="400px"
     >
-      <label>Пароль</label>
+      <Typography>Пароль</Typography>
       <Input
         {...register("username", {
           required: "Поле обязательно для заполнения",
         })}
         placeholder="Логин"
+        sx={{
+          color: "white",
+        }}
       />
-      <p>{errors.username?.message}</p>
+      <Typography>{errors.username?.message}</Typography>
 
-      <label>Пароль</label>
+      <Typography>Пароль</Typography>
       <Input
         {...register("password", {
           required: "Поле обязательно для заполнения",
         })}
         placeholder="Пароль"
+        type="password"
+        sx={{
+          color: "white",
+        }}
       />
 
-      <p>{errors.password?.message}</p>
+      <Typography>{errors.password?.message}</Typography>
       <Button type="submit">Войти</Button>
     </Form>
   );
