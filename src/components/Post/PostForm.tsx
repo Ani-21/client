@@ -13,7 +13,7 @@ type PostForm = {
   username: string;
   text?: string;
   tags?: string;
-  selectedFile?: string;
+  selectedFile?: File;
 };
 
 const PostForm = ({ username }: PostForm) => {
@@ -58,8 +58,7 @@ const PostForm = ({ username }: PostForm) => {
           },
         }
       );
-      const result = await request.data;
-      console.log(result);
+      return await request.data;
     } catch (err) {
       throw new Error("Что-то пошло не так");
     } finally {
