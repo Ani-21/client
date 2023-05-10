@@ -1,5 +1,6 @@
+import { useState, memo } from "react";
+
 import { useStore } from "effector-react";
-import { memo } from "react";
 
 import { AppBar, styled, Toolbar, Typography, Button } from "@mui/material";
 import { Phonelink, Logout } from "@mui/icons-material/";
@@ -9,6 +10,8 @@ import { theme } from "@/theme";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/constants";
 
+import { MobileNavBar } from "./MobileNavbar";
+
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
   justifyContent: "space-between",
@@ -17,6 +20,7 @@ const StyledToolbar = styled(Toolbar)({
 });
 
 const Navbar = memo(() => {
+  const [isOpened, setIsOpened] = useState(false);
   const store = useStore($authorization);
   const navigate = useNavigate();
 
@@ -36,15 +40,24 @@ const Navbar = memo(() => {
         >
           on.CONNECT
         </Typography>
-        <Phonelink
-          sx={{
-            display: { xs: "block", sm: "none" },
-          }}
-        />
+
         {store.loggedIn ? (
-          <Button onClick={() => handleLogout()}>
-            <Logout />
-          </Button>
+          <>
+            <Button
+              onClick={() => setIsOpened((prev) => !prev)}
+              sx={{
+                display: { xs: "block", sm: "none" },
+              }}
+            >
+              <Phonelink />
+            </Button>
+            {isOpened ? (
+              <MobileNavBar handleClick={() => setIsOpened(false)} />
+            ) : null}
+            <Button onClick={() => handleLogout()}>
+              <Logout />
+            </Button>
+          </>
         ) : null}
       </StyledToolbar>
     </AppBar>

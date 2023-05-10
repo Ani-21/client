@@ -17,7 +17,7 @@ const UsersPage = () => {
     <Stack>
       {users.map((user) => (
         <Link
-          id={user._id}
+          key={user._id}
           underline="none"
           sx={{ cursor: "pointer" }}
           onClick={() =>
