@@ -11,7 +11,7 @@ import { $authorization } from "@/store/authorization";
 
 type PostForm = {
   username: string;
-  text: string;
+  text?: string;
   tags?: string;
   selectedFile?: string;
 };
