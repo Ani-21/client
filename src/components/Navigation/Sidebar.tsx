@@ -6,7 +6,7 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
-import { menuItems } from "../constants";
+import { menuItems } from "../../constants";
 
 const Sidebar = () => {
   return (

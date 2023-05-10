@@ -4,6 +4,7 @@ import { useStore } from "effector-react";
 import useFetch from "@/hooks/useFetch";
 import { IFriend } from "@/models/IFriend";
 import { UserCard } from "@/shared/cards/User";
+import { SkeletonPost } from "@/shared/skeletons/Post";
 import { $authorization } from "@/store/authorization";
 import { Stack, Link } from "@mui/material";
 import useTabTitle from "@/hooks/useTabTitle";
@@ -17,7 +18,7 @@ const FriendsPage = () => {
     `/users/${userId}/friends`
   );
 
-  if (loading || friends === undefined) return <p>Загружаем</p>;
+  if (loading || friends === undefined) return <SkeletonPost />;
 
   return (
     <Stack>

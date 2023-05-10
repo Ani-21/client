@@ -19,7 +19,7 @@ const Form = ({
   return (
     <Box display="flex" justifyContent="center" alignItems="center">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack width={width} height={height}>
+        <Stack width={width} height={height} gap={1}>
           {children}
         </Stack>
       </form>

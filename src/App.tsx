@@ -1,9 +1,9 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import GuardContainer from "./components/GuardContainer";
+import GuardContainer from "./components/Auth/GuardContainer";
 
-import Layout from "./layout/Layout";
+import Layout from "./layout";
 
 const WelcomePage = lazy(() => import("./pages/Welcome"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
@@ -14,6 +14,7 @@ const UserPage = lazy(() => import("./pages/Profile/User"));
 
 import { AppRoutes } from "./constants";
 import { LinearProgress } from "@mui/material";
+import UsersPage from "./pages/Profile/Users";
 function App() {
   return (
     <Routes>
@@ -54,6 +55,14 @@ function App() {
               element={
                 <Suspense fallback={<LinearProgress />}>
                   <FriendsPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path={AppRoutes.usersPageRoute}
+              element={
+                <Suspense fallback={<LinearProgress />}>
+                  <UsersPage />
                 </Suspense>
               }
             />

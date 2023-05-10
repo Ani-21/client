@@ -1,12 +1,12 @@
 import { Stack } from "@mui/material";
 
-import Post from "@/components/Post";
+import Post from "@/components/Post/Post";
 
 import useFetch from "@/hooks/useFetch";
 import useTabTitle from "@/hooks/useTabTitle";
 
 import { IPost } from "@/models/IPost";
-import { SkeletonPost } from "@/shared/SkeletonPost";
+import { SkeletonPost } from "@/shared/skeletons/Post";
 import { setPosts } from "@/store/posts";
 
 const FeedPage = () => {

@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button, Input, Typography } from "@mui/material";
-import Form from "../shared/Form";
-import axios from "../api/axios";
+import Form from "../../shared/Form";
+import axios from "../../api/axios";
 
 type FormValues = {
   username: string;

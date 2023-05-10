@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import Form from "@/shared/Form";
 import { Box, Button, Input } from "@mui/material";
-import { AttachFile, ColorLens } from "@mui/icons-material";
+import { AttachFile } from "@mui/icons-material";
 import axios from "@/api/axios";
 
 type PostForm = {
@@ -46,7 +46,7 @@ const PostForm = ({ username }: PostForm) => {
       onSubmit={onSubmit}
       handleSubmit={handleSubmit}
       width="300px"
-      height="90px"
+      height="120px"
     >
       <Input
         sx={{ display: "none" }}
@@ -63,12 +63,15 @@ const PostForm = ({ username }: PostForm) => {
         }}
       />
       <p>{errors.text?.message}</p>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
         <Button>
           <AttachFile />
-        </Button>
-        <Button>
-          <ColorLens />
         </Button>
         <Button type="submit">Опубликовать</Button>
       </Box>

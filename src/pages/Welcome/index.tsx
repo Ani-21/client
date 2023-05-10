@@ -8,8 +8,8 @@ import { $authorization } from "@/store/authorization";
 
 import useTabTitle from "@/hooks/useTabTitle";
 
-import RegisterForm from "@/components/RegisterForm";
-import LoginForm from "@/components/LoginForm";
+import RegisterForm from "@/components/Auth/RegisterForm";
+import LoginForm from "@/components/Auth/LoginForm";
 
 import { AppRoutes } from "@/constants";
 

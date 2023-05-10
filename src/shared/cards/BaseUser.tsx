@@ -16,7 +16,7 @@ export const BaseUserCard = ({ username, children }: BaseCardProps) => {
         width: "300px",
       }}
     >
-      <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Box display="flex" alignItems="center">
         <Avatar
           alt={username}
           sx={{ width: 56, height: 56, bgcolor: theme.palette.primary.main }}

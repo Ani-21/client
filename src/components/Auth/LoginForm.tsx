@@ -61,7 +61,6 @@ const LoginForm = () => {
         }}
       />
       <Typography>{errors.username?.message}</Typography>
-
       <Typography>Пароль</Typography>
       <Input
         {...register("password", {

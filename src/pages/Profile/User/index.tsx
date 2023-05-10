@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import { useStore } from "effector-react";
 import { Box, Stack } from "@mui/material";
 
-import Post from "@/components/Post";
-import ProfileHeader from "@/components/ProfileHeader";
+import Post from "@/components/Post/Post";
+import ProfileHeader from "@/components/Profile/ProfileHeader";
 
 import useFetch from "@/hooks/useFetch";
 import { IUser } from "@/models/IUser";

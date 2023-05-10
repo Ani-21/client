@@ -1,9 +1,9 @@
 import { useStore } from "effector-react";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Skeleton } from "@mui/material";
 
-import Post from "@/components/Post";
-import PostFrom from "@/components/PostForm";
-import ProfileHeader from "@/components/ProfileHeader";
+import Post from "@/components/Post/Post";
+import PostFrom from "@/components/Post/PostForm";
+import ProfileHeader from "@/components/Profile/ProfileHeader";
 
 import useFetch from "@/hooks/useFetch";
 import useTabTitle from "@/hooks/useTabTitle";
@@ -20,7 +20,8 @@ const UserProfilePage = () => {
   const { posts } = postsStore;
   const { data: userInfo, loading } = useFetch<IUser>(`/users/${userId}`);
 
-  if (loading || userInfo === undefined) return <p>Загружаем</p>;
+  if (loading || userInfo === undefined)
+    return <Skeleton variant="rounded" width={300} height={160} />;
 
   const userPosts = posts.filter((post) => post.username === userInfo.username);
 

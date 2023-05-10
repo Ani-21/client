@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navigation/Navbar";
 import { theme } from "@/theme";
 import { Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";

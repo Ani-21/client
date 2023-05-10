@@ -1,5 +1,5 @@
-import Rightbar from "@/components/Rightbar";
-import Sidebar from "@/components/Sidebar";
+import Rightbar from "@/components/Profile/Rightbar";
+import Sidebar from "@/components/Navigation/Sidebar";
 import { Box, Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
 

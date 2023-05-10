@@ -11,4 +11,5 @@ export const menuItems = [
   { path: AppRoutes.userProfilePageRoute, text: "Моя страница" },
   { path: AppRoutes.profilePageRoute, text: "Новости" },
   { path: AppRoutes.friendsPageRoute, text: "Друзья" },
+  { path: AppRoutes.usersPageRoute, text: "Пользователи" },
 ];
