@@ -3,6 +3,9 @@ import { Button, Input, Typography } from "@mui/material";
 import Form from "../../shared/Form";
 import axios from "../../api/axios";
 
+import { IToken } from "@/models/IToken";
+import { setLoggedIn, setToken, setUserId } from "@/store/authorization";
+
 type FormValues = {
   username: string;
   city: string;
@@ -27,7 +30,11 @@ const RegisterForm = () => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      return await request.data;
+      const response: IToken = await request.data;
+      console.log(response);
+      setToken(response.accessToken);
+      setUserId(response.userId);
+      setLoggedIn(true);
     } catch (err) {
       throw new Error("Что-то пошло не так");
     } finally {

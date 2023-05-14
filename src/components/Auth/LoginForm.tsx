@@ -4,16 +4,12 @@ import { Button, Input, Typography } from "@mui/material";
 
 import axios from "@/api/axios";
 import Form from "@/shared/Form";
+import { IToken } from "@/models/IToken";
 import { setLoggedIn, setToken, setUserId } from "@/store/authorization";
 
 type FormValues = {
   username: string;
   password: string;
-};
-
-type Token = {
-  accessToken: string;
-  userId: string;
 };
 
 const LoginForm = () => {
@@ -30,7 +26,7 @@ const LoginForm = () => {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      const response: Token = await request.data;
+      const response: IToken = await request.data;
       setToken(response.accessToken);
       setUserId(response.userId);
       setLoggedIn(true);
@@ -50,7 +46,7 @@ const LoginForm = () => {
       width="300px"
       height="400px"
     >
-      <Typography>Пароль</Typography>
+      <Typography>Имя пользователя</Typography>
       <Input
         {...register("username", {
           required: "Поле обязательно для заполнения",
