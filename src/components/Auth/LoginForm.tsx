@@ -1,19 +1,16 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { Button, Input, Typography } from "@mui/material";
+import { Button, Input, LinearProgress, Typography } from "@mui/material";
 
 import axios from "@/api/axios";
 import Form from "@/shared/Form";
+import { IToken } from "@/models/IToken";
 import { setLoggedIn, setToken, setUserId } from "@/store/authorization";
+import { useState } from "react";
 
 type FormValues = {
   username: string;
   password: string;
-};
-
-type Token = {
-  accessToken: string;
-  userId: string;
 };
 
 const LoginForm = () => {
@@ -23,14 +20,16 @@ const LoginForm = () => {
     formState: { errors },
     reset,
   } = useForm<FormValues>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     try {
+      setIsLoading(true);
       const request = await axios.post("/auth", JSON.stringify(data), {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
-      const response: Token = await request.data;
+      const response: IToken = await request.data;
       setToken(response.accessToken);
       setUserId(response.userId);
       setLoggedIn(true);
@@ -40,6 +39,7 @@ const LoginForm = () => {
       throw new Error("Что-то пошло не так");
     } finally {
       reset();
+      setIsLoading(false);
     }
   };
 
@@ -50,7 +50,8 @@ const LoginForm = () => {
       width="300px"
       height="400px"
     >
-      <Typography>Пароль</Typography>
+      {isLoading ? <LinearProgress /> : null}
+      <Typography>Имя пользователя</Typography>
       <Input
         {...register("username", {
           required: "Поле обязательно для заполнения",
