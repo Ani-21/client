@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Button, Input, Typography } from "@mui/material";
+import { Button, Input, LinearProgress, Typography } from "@mui/material";
 import Form from "../../shared/Form";
 import axios from "../../api/axios";
 
@@ -23,15 +24,16 @@ const RegisterForm = () => {
     formState: { errors },
     reset,
   } = useForm<FormValues>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
     try {
+      setIsLoading(true);
       const request = await axios.post("/register", JSON.stringify(data), {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
       const response: IToken = await request.data;
-      console.log(response);
       setToken(response.accessToken);
       setUserId(response.userId);
       setLoggedIn(true);
@@ -39,6 +41,7 @@ const RegisterForm = () => {
       throw new Error("Что-то пошло не так");
     } finally {
       reset();
+      setIsLoading(false);
     }
   };
   return (
@@ -48,6 +51,7 @@ const RegisterForm = () => {
       width="300px"
       height="400px"
     >
+      {isLoading ? <LinearProgress /> : null}
       <Typography>Логин</Typography>
       <Input
         {...register("username", {
